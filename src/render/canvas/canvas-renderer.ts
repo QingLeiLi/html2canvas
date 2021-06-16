@@ -145,6 +145,9 @@ export class CanvasRenderer {
 
     renderTextWithLetterSpacing(text: TextBounds, letterSpacing: number) {
         if (letterSpacing === 0) {
+            // @lql add 1 line，解决字体下坠问题
+            // https://github.com/niklasvh/html2canvas/issues/2107
+            this.ctx.textBaseline = 'ideographic';
             this.ctx.fillText(text.text, text.bounds.left, text.bounds.top + text.bounds.height);
         } else {
             const letters = toCodePoints(text.text).map(i => fromCodePoint(i));
