@@ -37,7 +37,8 @@ export class CounterState {
                 const counter = this.counters[entry.counter];
                 if (counter && entry.increment !== 0) {
                     canReset = false;
-                    counter[Math.max(0, counter.length - 1)] += entry.increment;
+                    const index = Math.max(0, counter.length - 1);
+                    counter[index] = (counter[index] || 0) + entry.increment;
                 }
             });
         }
